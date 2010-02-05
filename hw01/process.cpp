@@ -24,11 +24,11 @@ void Process::decreaseCpuBurst( int d ){
 
 int Process::getarrivalTime() const{ return arrivalTime; }
 
-std::ostream & Process::operator<<( std::ostream & out, const Process & p){
-  std::out << "Process ID : "<< p.pid << endl;
-  std::out << "Arrival Time : "<< p.arrivalTime << endl;
-  std::out << "Max CPU : "<< p.cpuMax << endl;
-  std::out << "CPU Burst : "<< p.cpuBurst << endl;
+std::ostream & operator<<( std::ostream & out, const Process & p){
+  out << "Process ID : "<< p.pid << endl;
+  out << "Arrival Time : "<< p.arrivalTime << endl;
+  out << "Max CPU : "<< p.cpuMax << endl;
+  out << "CPU Burst : "<< p.cpuBurst << endl;
   
-  return std::out;
+  return out;
 }
