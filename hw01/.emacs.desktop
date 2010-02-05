@@ -1,0 +1,84 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Thu Feb  4 20:11:01 2010
+;; Desktop file format version 206
+;; Emacs version 23.1.50.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/Documents/Poly/Spring 2010/Operating Systems/hw01/" "~/Documents/Poly/Spring 2010/Operating Systems/hw01/Process.h" "~/Documents/"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/alex/Documents/Poly/Spring 2010/Operating Systems/hw01/Process.h"
+  "Process.h"
+  'c++-mode
+  '(abbrev-mode)
+  96
+  '(nil nil)
+  nil
+  nil
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "hw01"
+  'dired-mode
+  nil
+  271
+  '(nil nil)
+  t
+  '("/home/alex/Documents/Poly/Spring 2010/Operating Systems/hw01/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "Operating Systems"
+  'dired-mode
+  nil
+  255
+  '(nil nil)
+  t
+  '("/home/alex/Documents/Poly/Spring 2010/Operating Systems/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "Spring 2010"
+  'dired-mode
+  nil
+  359
+  '(nil nil)
+  t
+  '("/home/alex/Documents/Poly/Spring 2010/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "Poly"
+  'dired-mode
+  nil
+  283
+  '(nil nil)
+  t
+  '("/home/alex/Documents/Poly/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "Documents"
+  'dired-mode
+  nil
+  692
+  '(nil nil)
+  t
+  '("/home/alex/Documents/")
+  nil)
+

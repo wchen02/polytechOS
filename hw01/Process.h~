@@ -1,0 +1,16 @@
+#ifndef PROCESS_H
+#define PROCESS_H
+
+
+class Process{
+ private:
+  int pID;
+  int arrivalTime;
+  
+
+
+};
+
+
+
+#endif
