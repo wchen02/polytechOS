@@ -39,4 +39,5 @@ void Process::setProcess(int processid, int cputotal, int cpuburst, int arrivalt
   cpuBurst = cpuburst;
   arrivalTime = arrivalTime;
 }
-x
+
+
