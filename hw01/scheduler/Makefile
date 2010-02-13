@@ -1,14 +1,17 @@
 CC=g++
-OUT= -o silly
+OUT=-o output
+
 result: process.o scheduler.o test.o
 	$(CC) process.o scheduler.o test.o $(OUT)
 
+test.o:
+	$(CC) -c -Wall test.cpp
 
-test:
-	$(CC) -c test.cpp
+process.o: 
+	$(CC) -c -Wall process.h process.cpp
 
-process.o:
-	$(CC) -c process.h process.cpp
+scheduler.o: 
+	$(CC) -c -Wall scheduler.h scheduler.cpp
 
-scheduler.o:
-	$(CC) -c scheduler.h scheduler.cpp
+clean:
+	rm *.o *.gch 
