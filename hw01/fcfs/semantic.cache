@@ -1,0 +1,23 @@
+;; Object fcfs/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "fcfs/"
+  :tables (list 
+   (semanticdb-table "fcfs.h"
+    :major-mode 'c++-mode
+    :tags '(("FCFS_H" variable (:constant-flag t) nil [24 32]) ("vector" include (:system-flag t) (dependency-file none) [31 48]) ("../base/process.h" include nil (dependency-file none) [49 77]) ("Fcfs" type (:members (("public" label nil (reparse-symbol classsubparts) [91 98]) ("Fcfs" function (:constructor-flag t :arguments (("p" variable (:constant-flag t :type ("vector" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [106 131])) :type ("Fcfs" type (:type "class") nil nil)) (reparse-symbol classsubparts) [101 147]) ("Fcfs" function (:constructor-flag t :type ("Fcfs" type (:type "class") nil nil)) (reparse-symbol classsubparts) [150 201]) ("readprocessFile" function (:arguments (("file" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [228 240])) :type "void") (reparse-symbol classsubparts) [207 615]) ("private" label nil (reparse-symbol classsubparts) [626 634]) ("processes" variable (:type ("vector" type (:type "class") nil nil)) (reparse-symbol classsubparts) [637 664])) :type "class") nil [79 670]))
+    :file "fcfs.h"
+    :pointmax 680
+    :unmatched-syntax 'nil
+    )
+   (semanticdb-table "scheduler.cpp"
+    :major-mode 'c++-mode
+    :tags '(("iostream" include (:system-flag t) (dependency-file none) [1 20]) ("../base/process.h" include nil nil [21 49]) ("fstream" include (:system-flag t) (dependency-file none) [50 68]) ("main" function (:arguments (("argc" variable (:type "int") (reparse-symbol arg-sub-list) [103 112]) ("argv" variable (:pointer 1 :dereference 1 :type "char") (reparse-symbol arg-sub-list) [113 127])) :type "int") nil [93 258]))
+    :file "scheduler.cpp"
+    :pointmax 259
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre4"
+  :semanticdb-version "2.0pre4"
+  )
