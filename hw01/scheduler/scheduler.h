@@ -7,7 +7,9 @@
 
 bool DEBUG(true);
 
-enum Parameter { ProcessFile, IOdelay, ContextSwitchDelay, AgingRatio, Debug, Invalid };
+enum Parameter { ProcessFile, IOdelay, ContextSwitchDelay, AgingRatio, AlgorithmChoice, Debug, Invalid };
+
+enum Algorithm { FCFS, SRTN };
 
 class Scheduler{
 public:
@@ -16,6 +18,7 @@ public:
     Process pop();
     void push(Process newProcess);
     int size();
+    bool empty();
 	
     Parameter getPara(std::string param);
 
@@ -69,6 +72,7 @@ private:
     std::priority_queue<Process> ready;
     int ioDelay, contextSwitchDelay;
     double agingRatio;
+    Algorithm algorithm;
 };
 
 #endif

@@ -23,20 +23,34 @@ Parameter Scheduler::getPara(string param){
 	return ContextSwitchDelay;
     else if (param == "agingratio")
 	return AgingRatio;
+    else if (param == "algorithmchoice")
+	return AlgorithmChoice;
     else if (param == "debug")
 	return Debug;
     else return Invalid;
 }
 
 //Scheduler::Scheduler(){}
-//Process Scheduler::top(){}
-//Process Scheduler::pop(){}
-void Scheduler::push(Process newProcess){
-  
+Process Scheduler::top(){
+    return ready.top();
 }
-//int Scheduler::size(){}
-//
-	
+
+Process Scheduler::pop(){
+    return ready.pop();
+}
+
+void Scheduler::push(Process newProcess){
+    ready.push(newProcess); // need to decide the algorithm choice before this
+}
+
+int Scheduler::size(){
+    reutrn ready.size();
+}
+
+bool Scheduler::empty(){
+    return ready.empty();
+}	
+
 void Scheduler::readProcess(string filename){
     ifstream ifs(filename.c_str());
     if(!ifs) exit(1);
@@ -72,9 +86,15 @@ void Scheduler::setValue(Parameter param, string value){
 	stream >> value;
 	stream << agingRatio;
 	break;
+    case AlgorithmChoice:
+	tmp = lowerCase(value);
+	if(tmp == "fcfs")
+	    Algorithm = FCFS;
+	else if (tmp == "srtn")
+	    Algorithm = SRTN;
+	break;
     case Debug: 
-	stream >> value;
-	stream << tmp;
+	tmp = lowerCase(value);
 	DEBUG = (tmp == "true") ? true : false;
 	break;
     default:
