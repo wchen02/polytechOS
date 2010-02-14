@@ -1,12 +1,11 @@
 #ifndef _PROCESS_H_
 #define _PROCESS_H_
 #include <iostream>
-#include "functors.hpp"
+
 
 class Process{
 
-   friend LeastRemainingTime;
-   
+  
    friend std::ostream & operator<<( std::ostream & out, const Process & p );
    
 public:

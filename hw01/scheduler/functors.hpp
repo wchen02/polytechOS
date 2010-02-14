@@ -9,9 +9,10 @@
  */
 class LeastRemainingTime{
 public:
-   bool operator( )( const Process & lhs, const Process & rhs ){
+  
+   bool operator( );/*( const Process & lhs, const Process & rhs ){
       return lhs.getcpuTotal() < rhs.getcpuTotal();
-   }
+      }*/
 };
 
 

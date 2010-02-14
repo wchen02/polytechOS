@@ -26,7 +26,7 @@ public:
     * often enough, it its worth inline'ing the function to 
     * gen rand ints
     */
-   inline int nextrandInt( std::string ) const ;
+   inline int nextrandInt( std::string randNumfile="" )  ;
 
    void readProcess(std::string filename); // adds new process to the queue from the file
    /*Arrival Time: The time that the request is initially made to run the process. Obviously, it is not possible for the process to start running before this time.
@@ -85,16 +85,6 @@ private:
 };
 
 
-/* Will be able to hand it to the priority queue for comparing
- * which Process has the least remaining time
- * for the SRTN scheduling algorithm
- */
-class LeastRemainingTime{
-public:
-   bool operator( )( const Process & lhs, const Process & rhs ){
-      return lhs.getcpuTotal() < rhs.getcpuTotal();
-   }
-};
 
 
 

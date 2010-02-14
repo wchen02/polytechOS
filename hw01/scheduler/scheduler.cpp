@@ -35,16 +35,16 @@ Process Scheduler::top(){
    return ready.top();
 }
 
-Process Scheduler::pop(){
-   return ready.pop();
-}
+/*Process Scheduler::pop(){
+  return ready.pop( );
+  }*/
 
 void Scheduler::push(Process newProcess){
    ready.push(newProcess); // need to decide the algorithm choice before this
 }
 
 int Scheduler::size(){
-   reutrn ready.size();
+   return ready.size();
 }
 
 bool Scheduler::empty(){
@@ -66,11 +66,11 @@ void Scheduler::readProcess(string filename){
    }
 }
 
-int Scheduler::nextrandInt( string randNumfile = "" ) const { 
+int Scheduler::nextrandInt( std::string randNumfile )  { 
    /* keep the size of the rand dequeue reasonable, 100 elements max,
     * but only read if the queue is about half the size
     */
-   if( 50 < rand.size( ) )
+   if( !rand.empty( ) ) 
       return rand.pop_front( );
    
    if( randNumfile.length() == 0 )/*default file if none input*/
@@ -86,7 +86,7 @@ int Scheduler::nextrandInt( string randNumfile = "" ) const {
 	    " does not exist or is currently locked by other process " << endl;
    }
    
-   int tmp = 0, tmp1 = 50;
+   int tmp = 0, tmp1 = 100;
    /* since the size is less than what we want, add some more from file, 
     */
 
@@ -94,20 +94,26 @@ int Scheduler::nextrandInt( string randNumfile = "" ) const {
    /* if its the end of file, start from the top
     */
    if( ifl.eof( ) )
-      lastNumrand = 0;
+      lineNumrand = 0;
    
    /* skip the number of lines already read
     */
-   int skipLines = lastNumrand + 50;
+   int skipLines = lineNumrand;
 
    while( ifl >> tmp && 0 < tmp1){
-      tmp1--;
-      if( skipLines < lastNumrand  ){
+      
+      if( skipLines < 0  ){
 	 rand.push_back( tmp );
 	 lineNumrand++;
+	 tmp1--;
       }
+      skipLines--;
       
    }
+      
+   rand.pop_front( );
+
+   
    
 }
 
@@ -136,9 +142,11 @@ void Scheduler::setValue(Parameter param, string value){
    case AlgorithmChoice:
       tmp = lowerCase(value);
       if(tmp == "fcfs")
-	 Algorithm = FCFS;
+	 cout << "FIX ENUM" << endl;
+      //Algorithm = FCFS;
       else if (tmp == "srtn")
-	 Algorithm = SRTN;
+	 cout << "FIX ENUM" << endl;
+      //Algorithm = SRTN;
       break;
    case Debug: 
       tmp = lowerCase(value);
