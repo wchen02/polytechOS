@@ -26,7 +26,7 @@ public:
     * often enough, it its worth inline'ing the function to 
     * gen rand ints
     */
-   inline int nextrandInt( std::string randNumfile="" )  ;
+   int nextrandInt( std::string randNumfile="" )  ;
 
    void readProcess(std::string filename); // adds new process to the queue from the file
    /*Arrival Time: The time that the request is initially made to run the process. Obviously, it is not possible for the process to start running before this time.
