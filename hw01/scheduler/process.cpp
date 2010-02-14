@@ -14,15 +14,17 @@ int Process::getId() const{ return pid; }
 
 int Process::getTotalcpu() const{ return cpuMax; }
 
-void Process::decreaseCpuBurst( int d ){
-    cpuBurst -= d;
-    if( d < 0) {     //check to see if the burst becomes
-	d = 0;          //negative, if so disable future    
+void Process::decreasecpuTotal( int d ){
+    cpuMax -= d;
+    if( cpuMax < 0) {     //check to see if the burst becomes
+	cpuMax = 0;          //negative, if so disable future    
 	run = false;  //runs of the process
     }
 }
 
-int Process::getarrivalTime() const{ return arrivalTime; }
+int Process::getarrivalTime( ) const { return arrivalTime; }
+
+int Process::getcpuBurst( ) const { return cpuBurst; }
 
 std::ostream & operator<<( std::ostream & out, const Process & p){
     out << "Process ID : "<< p.pid << endl;
