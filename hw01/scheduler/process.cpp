@@ -1,6 +1,8 @@
 #include "process.h"
 #include <iostream>
 
+using namespace std;
+
 Process::Process( int id,             //Process ID for the scheduler
 		  int arrivedTime,    //Arrival Time for FCFS algo
 		  int totalCPU,       //Maximun CPU this process can use
@@ -41,5 +43,3 @@ void Process::setProcess(int processid, int cputotal, int cpuburst, int arrivalt
     cpuBurst = cpuburst;
     arrivalTime = arrivalTime;
 }
-
-

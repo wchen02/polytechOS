@@ -1,10 +1,9 @@
 #include <queue>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 #include "process.h"
 #include "scheduler.h"
-#include <cstdlib>
-
 
 using namespace std;
 
@@ -70,9 +69,14 @@ int Scheduler::nextrandInt( std::string randNumfile )  {
    /* keep the size of the rand dequeue reasonable, 100 elements max,
     * but only read if the queue is about half the size
     */
-   if( !rand.empty( ) ) 
-      return rand.pop_front( );
-   
+    int tmpFront;
+    if( !rand.empty( ) ) {
+	// return rand.pop_front( ); // pop_front returns void
+	tmpFront = rand.front();
+	rand.pop_front();
+	return tmpFront;
+    }
+
    if( randNumfile.length() == 0 )/*default file if none input*/
       randNumfile = "../misc/random-numbers";
    

@@ -5,7 +5,6 @@
 
 class Process{
 
-  
    friend std::ostream & operator<<( std::ostream & out, const Process & p );
    
 public:
@@ -40,13 +39,4 @@ private:
     bool run;
 };
 
-/*
-class CompareFCFS { // not needed for fcfs read specs
-public:
-    bool operator(Process rhs, Process lhs){
-	return rhs.pid < lhs.pid;	
-    } 
-    };*/
 #endif
-
-

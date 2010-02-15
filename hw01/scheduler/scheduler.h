@@ -80,7 +80,7 @@ private:
    double agingRatio;
    Algorithm algorithm;
 
-   std::deque<int> rand;
+   std::deque<int> rand; // why a deque?
    int lineNumrand;
 };
 
