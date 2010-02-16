@@ -1,21 +1,17 @@
-#ifndef SCHEDULER_H
-#define SCHEDULER_H
+#ifndef FCFS_H
+#define FCFS_H
 
 #include <queue>
 #include <string>
-#include <vector>
 #include "functors.hpp"
 #include "process.h"
+#include "scheduler.h"
 
-bool DEBUG(true);
-
-enum Parameter { ProcessFile, IOdelay, ContextSwitchDelay, AgingRatio, Debug, Invalid };
-
-class FCFS : public Schdeuler{
+class FCFS : public Scheduler{
 public:
 	//FCFS();
-	Process Scheduler::top() const;
-	void Scheduler::pop() = 0;
+	Process top() const;
+	void pop();
 	void push(Process newProcess);
 	int size() const;
 	bool empty() const;

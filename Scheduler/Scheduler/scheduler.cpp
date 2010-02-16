@@ -28,9 +28,11 @@ Parameter Scheduler::getPara(string param){
 	else return Invalid;
 }
 
-/*
-Scheduler::Scheduler(){}
-Process Scheduler::top(){
+
+Scheduler::Scheduler(string resourceFile){
+	readResource(resourceFile);
+}
+/*Process Scheduler::top(){
 	return ready.top();
 }
 
@@ -81,11 +83,8 @@ int Scheduler::nextrandInt( std::string randNumfile )  {
 	ifstream ifl( randNumfile.c_str( ) );
 
 	if(!ifl){
+		if(DEBUG) cerr << "\nERROR: The file given for the random numbers, does not exist or is currently locked by other process\n";
 		exit(1);
-
-		if(DEBUG)
-			cerr << "\nERROR: The file given for the random numbers,"
-			" does not exist or is currently locked by other process " << endl;
 	}
 
 	int tmp = 0, tmp1 = 100;
@@ -182,5 +181,3 @@ void Scheduler::readResource(string filename){
 int Scheduler::avgBurst(Process process){
 	return 0;
 }
-//void Scheduler::FCFS(){}
-//void Scheduler::SRTN(){}

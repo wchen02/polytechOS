@@ -1,7 +1,7 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
-//#include <queue>
+#include <queue>
 #include <string>
 //#include <vector>
 #include "functors.hpp"
@@ -13,9 +13,9 @@ enum Parameter { ProcessFile, IOdelay, ContextSwitchDelay, AgingRatio, Debug, In
 
 class Scheduler{
 public:
-	//Scheduler();
-	Process virtual Scheduler::top() const = 0;
-	void virtual Scheduler::pop() = 0;
+	Scheduler(string resourceFile);
+	Process virtual top() const = 0;
+	void virtual pop() = 0;
 	void virtual push(Process newProcess) = 0;
 	int virtual size() const = 0;
 	bool virtual empty() const = 0;
