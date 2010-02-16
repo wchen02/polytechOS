@@ -178,3 +178,7 @@ void Scheduler::readResource(const string& filename){
 int Scheduler::avgBurst(const Process& process){
 	return 0;
 }
+
+double Scheduler::getAgingRatio(){
+	return agingRatio;
+}

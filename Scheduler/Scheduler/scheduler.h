@@ -14,7 +14,7 @@ public:
 	Scheduler(const std::string& resourceFile);
 	Process virtual top() const = 0;
 	void virtual pop() = 0;
-	virtual void push(const Process& newProcess) = 0;
+	void virtual push(const Process& newProcess) = 0;
 	int virtual size() const = 0;
 	bool virtual empty() const = 0;
 
@@ -48,7 +48,7 @@ public:
 	*/
 	int avgBurst(const Process& process);
 
-
+	double getAgingRatio();
 	/* FCFS. Schedule the processes in the order in which they become ready.
 	o Non-preemptive
 	o Allow each process to run for its complete burst
