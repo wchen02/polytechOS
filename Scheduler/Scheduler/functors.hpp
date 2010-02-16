@@ -15,4 +15,12 @@ public:
       }
 };
 
+// well, since we are using priority queue for both of our algorithms, we need to order them in FCFS fashion.
+class CompareFCFS { // not needed for fcfs read specs
+public:
+	bool operator()(const Process& rhs, const Process& lhs) const{
+		return rhs.getarrivalTime() < lhs.getarrivalTime();	
+	} 
+};
+
 #endif

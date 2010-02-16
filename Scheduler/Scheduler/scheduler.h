@@ -7,8 +7,6 @@
 #include "functors.hpp"
 #include "process.h"
 
-bool DEBUG(true);
-
 enum Parameter { ProcessFile, IOdelay, ContextSwitchDelay, AgingRatio, Debug, Invalid };
 
 class Scheduler{
@@ -81,6 +79,7 @@ private:
 
 	std::deque<int> rand; // why a deque?
 	int lineNumrand;
+	bool DEBUG;
 };
 
 #endif

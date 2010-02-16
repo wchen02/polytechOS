@@ -9,7 +9,7 @@ using namespace std;
 FCFS::FCFS(string resourceFile) : Scheduler(resourceFile){}
 
 Process FCFS::top() const {
-	return ready.front();
+	return ready.top();
 }
 
 void FCFS::pop(){

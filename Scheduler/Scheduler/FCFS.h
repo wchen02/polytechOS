@@ -2,6 +2,7 @@
 #define FCFS_H
 
 #include <queue>
+#include <vector>
 #include <string>
 #include "functors.hpp"
 #include "process.h"
@@ -40,8 +41,7 @@ private:
 	* For your convience, all I/O requests for this simulator will take the same amount of time, which is specified in the resource file.
 	* When the I/O is complete, the process will be placed back on the appropriate "Ready Queue".
 	*/
-	std::queue<Process> waiting;
-	std::queue<Process> ready;
+	std::priority_queue<Process, std::vector<Process>, CompareFCFS> waiting, ready;
 };
 
 #endif
