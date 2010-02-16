@@ -1,11 +1,13 @@
 #include <iostream>
-#include <String>
+#include <string>
 #include <fstream>
 #include "scheduler.h"
 #include "fcfs.h"
 //#include "srtn.h"
 
 using namespace std;
+
+const string RESOURCE_FILE("scheduling.txt");
 
 void menu(){
 	int command;
@@ -20,17 +22,25 @@ void menu(){
 	
 	cin >> command; // this doesn't protect against invalid entries!
 
-	switch(command){
-		case 1:
-			task = new FCFS();
-			break;
-		case 2:
-			break;
-		case 3:
-			exit(0);
-			break;
-		default:
-			break;
+	while(true){
+		switch(command){
+			case 1:
+				task = new FCFS(RESOURCE_FILE.c_str());
+				break;
+			case 2:
+				//task = new SRTN(RESOURCE_FILE.c_str());
+				break;
+			case 3:
+				exit(0);
+				break;
+			default:
+				cout << "INVALID ENTRY TRY AGAIN\n";
+				system("pause");
+				system("cls");
+				cout << output;
+				cin >> command; // this doesn't protect against invalid entries!
+				break;
+		}
 	}
 
 }

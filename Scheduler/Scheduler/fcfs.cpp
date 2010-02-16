@@ -4,6 +4,10 @@
 #include "scheduler.h"
 #include "fcfs.h"
 
+using namespace std;
+
+FCFS::FCFS(string resourceFile) : Scheduler(resourceFile){}
+
 Process FCFS::top() const {
 	return ready.front();
 }

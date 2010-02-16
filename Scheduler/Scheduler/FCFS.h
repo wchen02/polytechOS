@@ -9,7 +9,8 @@
 
 class FCFS : public Scheduler{
 public:
-	//FCFS();
+	FCFS(std::string resourceFile);
+
 	Process top() const;
 	void pop();
 	void push(Process newProcess);
