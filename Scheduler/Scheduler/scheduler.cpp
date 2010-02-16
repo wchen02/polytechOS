@@ -161,7 +161,7 @@ void Scheduler::readResource(const string& filename){
 		pos = tmp.find("=");
 		if(DEBUG) cout << "\tpos: " << pos << endl;
 
-		parameter = lowerCase( tmp.substr(0, pos-1) );
+		parameter = lowerCase( tmp.substr(0, pos) );
 		if(DEBUG) cout << "\tparameter: " << parameter << endl;
 
 		param = getPara(parameter);
