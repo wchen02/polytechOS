@@ -14,7 +14,7 @@ public:
 
 	Process top() const;
 	void pop();
-	void push(Process newProcess);
+	void push(const Process& newProcess);
 	int size() const;
 	bool empty() const;
 

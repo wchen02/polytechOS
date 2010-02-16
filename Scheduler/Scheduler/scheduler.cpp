@@ -66,7 +66,7 @@ void Scheduler::readProcess(const string& filename){
 	}
 }
 
-int Scheduler::nextrandInt(string randNumfile )  { 
+int Scheduler::nextrandInt(const std::string& randNumfile){ 
 	/* keep the size of the rand dequeue reasonable, 100 elements max,
 	* but only read if the queue is about half the size
 	*/
@@ -76,9 +76,6 @@ int Scheduler::nextrandInt(string randNumfile )  {
 		rand.pop_front();
 		return tmpFront;
 	}
-
-	if( randNumfile.length() == 0 )/*default file if none input*/
-		randNumfile = "../misc/random-numbers";
 
 	ifstream ifl( randNumfile.c_str( ) );
 

@@ -19,7 +19,7 @@ void FCFS::pop(){
 	ready.pop( );
 }
 
-void FCFS::push(Process newProcess){
+void FCFS::push(const Process& newProcess){
 	ready.push(newProcess); // need to decide the algorithm choice before this
 }
 
