@@ -1,3 +1,4 @@
+#include <iostream>
 #include <queue>
 #include <cstdlib>
 #include "process.h"
@@ -6,7 +7,9 @@
 
 using namespace std;
 
-FCFS::FCFS(string resourceFile) : Scheduler(resourceFile){}
+FCFS::FCFS(string resourceFile) : Scheduler(resourceFile){
+	cout << "meows";
+}
 
 Process FCFS::top() const {
 	return ready.top();

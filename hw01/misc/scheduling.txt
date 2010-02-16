@@ -1,0 +1,5 @@
+ProcessFile=pfiled.txt
+IOdelay=2
+ContextSwitchDelay=1
+AgingRatio=.5
+Debug=true

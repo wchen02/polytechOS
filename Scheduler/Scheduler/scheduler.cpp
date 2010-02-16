@@ -14,7 +14,7 @@ string lowerCase(string str){
 	return str;
 }
 
-Parameter Scheduler::getPara(string param){
+Parameter Scheduler::getPara(const string& param){
 	if(param == "processfile")
 		return ProcessFile;
 	else if (param == "iodelay")
@@ -29,7 +29,7 @@ Parameter Scheduler::getPara(string param){
 }
 
 
-Scheduler::Scheduler(string resourceFile){
+Scheduler::Scheduler(const string& resourceFile){
 	readResource(resourceFile);
 }
 /*Process Scheduler::top(){
@@ -53,7 +53,7 @@ bool Scheduler::empty(){
 }
 */	
 
-void Scheduler::readProcess(string filename){
+void Scheduler::readProcess(const string& filename){
 	ifstream ifs(filename.c_str());
 	if(!ifs) exit(1);
 
@@ -66,7 +66,7 @@ void Scheduler::readProcess(string filename){
 	}
 }
 
-int Scheduler::nextrandInt( std::string randNumfile )  { 
+int Scheduler::nextrandInt(string randNumfile )  { 
 	/* keep the size of the rand dequeue reasonable, 100 elements max,
 	* but only read if the queue is about half the size
 	*/
@@ -118,7 +118,7 @@ int Scheduler::nextrandInt( std::string randNumfile )  {
 }
 
 
-void Scheduler::setValue(Parameter param, string value){
+void Scheduler::setValue(const Parameter& param, const string& value){
 	stringstream stream;
 	string tmp;
 
@@ -128,16 +128,16 @@ void Scheduler::setValue(Parameter param, string value){
 	   readProcess(value);
 	   break;
    case IOdelay: 
-	   stream >> value;
-	   stream << ioDelay;
+	   stream << value;
+	   stream >> ioDelay;
 	   break;
    case ContextSwitchDelay: 
-	   stream >> value;
-	   stream << contextSwitchDelay;
+	   stream << value;
+	   stream >> contextSwitchDelay;
 	   break;
    case AgingRatio: 
-	   stream >> value;
-	   stream << agingRatio;
+	   stream << value;
+	   stream >> agingRatio;
 	   break;
    case Debug: 
 	   tmp = lowerCase(value);
@@ -150,7 +150,7 @@ void Scheduler::setValue(Parameter param, string value){
 }
 
 
-void Scheduler::readResource(string filename){
+void Scheduler::readResource(const string& filename){
 	ifstream ifs(filename.c_str());
 	if(!ifs) exit(1);
 
@@ -178,6 +178,6 @@ void Scheduler::readResource(string filename){
 	}
 }
 
-int Scheduler::avgBurst(Process process){
+int Scheduler::avgBurst(const Process& process){
 	return 0;
 }

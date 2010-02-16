@@ -11,22 +11,22 @@ enum Parameter { ProcessFile, IOdelay, ContextSwitchDelay, AgingRatio, Debug, In
 
 class Scheduler{
 public:
-	Scheduler(std::string resourceFile);
+	Scheduler(const std::string& resourceFile);
 	Process virtual top() const = 0;
 	void virtual pop() = 0;
-	void virtual push(Process newProcess) = 0;
+	void virtual push(const Process& newProcess) = 0;
 	int virtual size() const = 0;
 	bool virtual empty() const = 0;
 
-	Parameter getPara(std::string param);
+	Parameter getPara(const std::string& param);
 
 	/* may take advantage of inline, since we will be calling it
 	* often enough, it its worth inline'ing the function to 
 	* gen rand ints
 	*/
-	int nextrandInt( std::string randNumfile="" )  ;
+	int nextrandInt(std::string randNumfile="" )  ;
 
-	void readProcess(std::string filename); // adds new process to the queue from the file
+	void readProcess(const std::string& filename); // adds new process to the queue from the file
 	/*Arrival Time: The time that the request is initially made to run the process. Obviously, it is not possible for the process to start running before this time.
 	* Total CPU: The total time that the process will need to use the CPU.
 	* Average CPU Burst:
@@ -36,8 +36,8 @@ public:
 	+ Write a function random() that each time it is called returns the next number in the file. If you run out of numbers, then start from the beginning.
 	o Preemptive algorithms, such as SRTN, may interrupt a process before the current burst is complete. Such an interruption does not terminate the burst. When the process is resumed, it will be continuing with whatever is left of its last burst.
 	*/
-	void setValue(Parameter param, std::string value);
-	void readResource(std::string filename);
+	void setValue(const Parameter& param, const std::string& value);
+	void readResource(const std::string& filename);
 
 	/*
 	ProcessFile=Processes.txt
@@ -46,7 +46,7 @@ public:
 	AgingRatio=.5
 	Debug=true
 	*/
-	int avgBurst(Process process);
+	int avgBurst(const Process& process);
 
 
 	/* FCFS. Schedule the processes in the order in which they become ready.
