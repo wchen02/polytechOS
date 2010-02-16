@@ -13,7 +13,7 @@ enum Parameter { ProcessFile, IOdelay, ContextSwitchDelay, AgingRatio, Debug, In
 
 class Scheduler{
 public:
-	Scheduler(string resourceFile);
+	Scheduler(std::string resourceFile);
 	Process virtual top() const = 0;
 	void virtual pop() = 0;
 	void virtual push(Process newProcess) = 0;
