@@ -23,14 +23,13 @@ Parameter Scheduler::getPara(string param){
 		return ContextSwitchDelay;
 	else if (param == "agingratio")
 		return AgingRatio;
-	else if (param == "algorithmchoice")
-		return AlgorithmChoice;
 	else if (param == "debug")
 		return Debug;
 	else return Invalid;
 }
 
-//Scheduler::Scheduler(){}
+/*
+Scheduler::Scheduler(){}
 Process Scheduler::top(){
 	return ready.top();
 }
@@ -49,7 +48,8 @@ int Scheduler::size(){
 
 bool Scheduler::empty(){
 	return ready.empty();
-}	
+}
+*/	
 
 void Scheduler::readProcess(string filename){
 	ifstream ifs(filename.c_str());
@@ -140,13 +140,6 @@ void Scheduler::setValue(Parameter param, string value){
 	   stream >> value;
 	   stream << agingRatio;
 	   break;
-   case AlgorithmChoice:
-	   tmp = lowerCase(value);
-	   if(tmp == "fcfs")
-		   algorithm = _FCFS;
-	   else if (tmp == "srtn")
-		   algorithm = _SRTN;
-	   break;
    case Debug: 
 	   tmp = lowerCase(value);
 	   DEBUG = (tmp == "true") ? true : false;
@@ -189,5 +182,5 @@ void Scheduler::readResource(string filename){
 int Scheduler::avgBurst(Process process){
 	return 0;
 }
-void Scheduler::FCFS(){}
-void Scheduler::SRTN(){}
+//void Scheduler::FCFS(){}
+//void Scheduler::SRTN(){}
