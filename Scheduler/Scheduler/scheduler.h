@@ -3,7 +3,7 @@
 
 #include <queue>
 #include <string>
-//#include <vector>
+#include <vector>
 #include "functors.hpp"
 #include "process.h"
 
@@ -65,7 +65,7 @@ public:
 	//void SRTN();
 	//The scheduling algorithms are not aware of how long a process's burst will actually be. They only become aware when a process's burst ends. By keeping all times as integers (except for the predicted burst of the aging algorithm), this is easy to manage.
 protected:
-	std::queue<Process> readin;
+	std::vector<Process> arrival;
 	int ioDelay, contextSwitchDelay;
 	double agingRatio;
 	std::deque<int> rand; // why a deque?

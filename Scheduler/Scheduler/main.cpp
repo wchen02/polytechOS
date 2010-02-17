@@ -35,12 +35,12 @@ void menu(){
 				break;
 			default:
 				cout << "INVALID ENTRY TRY AGAIN\n";
-				system("pause");
-				system("cls");
-				cout << output;
-				cin >> command; // this doesn't protect against invalid entries!
 				break;
 		}
+		system("pause");
+		system("cls");
+		cout << output;
+		cin >> command; // this doesn't protect against invalid entries!
 	}
 
 }

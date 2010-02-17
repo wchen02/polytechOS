@@ -42,7 +42,7 @@ void Scheduler::readProcess(const string& filename){
 	if(DEBUG) cout << "Reading in Processes\n\tID:\tArrival Time\tTotal CPU\tAvgBurst\n";
 	while(ifs >> id >> arrivalTime >> totalCPU >> avgBurst){
 		if(DEBUG) cout << "\t" << id << "\t" << arrivalTime << "\t" << totalCPU << "\t" << avgBurst << endl;
-		readin.push(Process(id, arrivalTime, totalCPU, avgBurst));
+		arrival.push_back(Process(id, arrivalTime, totalCPU, avgBurst));
 	}
 }
 

@@ -30,15 +30,17 @@ public:
 	//void SRTN();
 	//The scheduling algorithms are not aware of how long a process's burst will actually be. They only become aware when a process's burst ends. By keeping all times as integers (except for the predicted burst of the aging algorithm), this is easy to manage.
 	
-	void waitingQueueTask();
-	void readinQueueTask();
-	void readyQueueTask();
 private:
 	/*A process can only run as long as its CPU burst, then it has to stop while it's next I/O request is being serviced.
 	* While the process is waiting for the I/O to complete, it is blocked and will be placed on a "Wait Queue".
 	* For your convience, all I/O requests for this simulator will take the same amount of time, which is specified in the resource file.
 	* When the I/O is complete, the process will be placed back on the appropriate "Ready Queue".
 	*/
+	void waitingQueueTask();
+	void readinQueueTask();
+	void readyQueueTask();
+	void resetBurstNdelay(Process&);
+
 	std::priority_queue<Process, std::vector<Process>, CompareFCFS> ready;
 	std::vector<Process> waiting;
 	Process running;

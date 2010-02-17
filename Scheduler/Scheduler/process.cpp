@@ -14,7 +14,7 @@ Process::Process( int id,             //Process ID for the scheduler
 	run = false; 
 }
 
-Process::Process() : cpuBurst(-9999){} // cpuBurst = -9999 to mean that this is a tmp or invalid process
+Process::Process() : pid(-1), cpuBurst(-9999){} // cpuBurst = -9999 to mean that this is a tmp or invalid process
 
 bool Process::isReady() const{ return run; }
 
