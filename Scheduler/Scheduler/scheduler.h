@@ -12,11 +12,6 @@ enum Parameter { ProcessFile, IOdelay, ContextSwitchDelay, AgingRatio, Debug, In
 class Scheduler{
 public:
 	Scheduler(const std::string& resourceFile);
-	Process virtual top() const = 0;
-	void virtual pop() = 0;
-	void virtual push(const Process& newProcess) = 0;
-	int virtual size() const = 0;
-	bool virtual empty() const = 0;
 
 	Parameter getPara(const std::string& param);
 
@@ -24,7 +19,7 @@ public:
 	* often enough, it its worth inline'ing the function to 
 	* gen rand ints
 	*/
-	int nextrandInt(const std::string& randNumfile="../misc/random-numbers");
+	int random(const std::string& randNumfile="../misc/random-numbers");
 
 	void readProcess(const std::string& filename); // adds new process to the queue from the file
 	/*Arrival Time: The time that the request is initially made to run the process. Obviously, it is not possible for the process to start running before this time.
@@ -49,6 +44,9 @@ public:
 	int avgBurst(const Process& process);
 
 	double getAgingRatio();
+	void virtual waitingQueueTask() = 0;
+	void virtual readinQueueTask() = 0;
+	void virtual readyQueueTask() = 0;
 	/* FCFS. Schedule the processes in the order in which they become ready.
 	o Non-preemptive
 	o Allow each process to run for its complete burst
@@ -66,6 +64,15 @@ public:
 	*/
 	//void SRTN();
 	//The scheduling algorithms are not aware of how long a process's burst will actually be. They only become aware when a process's burst ends. By keeping all times as integers (except for the predicted burst of the aging algorithm), this is easy to manage.
+protected:
+	std::queue<Process> readin;
+	int ioDelay, contextSwitchDelay;
+	double agingRatio;
+	std::deque<int> rand; // why a deque?
+	int lineNumrand;
+	bool DEBUG, nothingToRun;
+	int now;
+
 private:
 	/*A process can only run as long as its CPU burst, then it has to stop while it's next I/O request is being serviced.
 	* While the process is waiting for the I/O to complete, it is blocked and will be placed on a "Wait Queue".
@@ -74,12 +81,6 @@ private:
 	*/
 	//std::priority_queue<Process> waiting;
 	//std::priority_queue<Process, std::vector<Process>, CompareFCFS> ready;
-	int ioDelay, contextSwitchDelay;
-	double agingRatio;
-
-	std::deque<int> rand; // why a deque?
-	int lineNumrand;
-	bool DEBUG;
 };
 
 #endif

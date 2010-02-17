@@ -19,32 +19,7 @@ o If the aging algorithm predicts that a process will have a CPU burst of initia
 
 class Srtn : public Scheduler{
 public:
-	/* Inheritance methods */
-	//the following methods are for the ready queue only.
-	Process top( ) const;          
-	void    pop( );
-	void    push(const Process & newProcess);
-	int     size( ) const;
-	bool    empty( ) const;
-
-	Srtn();	
-	/* for consistency, they will be the actual implementations
-	* of the functions mentioned above, meaning, pop will return
-	* void pop_readyQueue ( )
-	*/
-	void	push_readyQueue( const Process & newProcess );
-	void	pop_readyQueue( );
-	Process top_readyQueue( );
-	int		size_readyQueue( );
-	bool	empty_readyQueue( );
-
-	void	push_waitingQueue( const Process & newProcess );
-	void    pop_waitingQueue( );
-	Process top_waitingQueue( );
-	int		size_waitingQueue( );
-	bool	empty_waitingQueue( );
-
-
+	Srtn(const std::string& resourceFile);
 	double predictNextBurst( );
 	void updateLastBurst( int );
 
@@ -54,7 +29,5 @@ private:
 	int lastBurst;
 	double history;
 };
-
-
 
 #endif 

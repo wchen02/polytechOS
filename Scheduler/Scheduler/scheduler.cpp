@@ -29,29 +29,9 @@ Parameter Scheduler::getPara(const string& param){
 }
 
 
-Scheduler::Scheduler(const string& resourceFile){
+Scheduler::Scheduler(const string& resourceFile) : now(0) {
 	readResource(resourceFile);
 }
-/*Process Scheduler::top(){
-	return ready.top();
-}
-
-void Scheduler::pop(){
-	ready.pop( );
-}
-
-void Scheduler::push(Process newProcess){
-	ready.push(newProcess); // need to decide the algorithm choice before this
-}
-
-int Scheduler::size(){
-	return ready.size();
-}
-
-bool Scheduler::empty(){
-	return ready.empty();
-}
-*/	
 
 void Scheduler::readProcess(const string& filename){
 	ifstream ifs(filename.c_str());
@@ -62,15 +42,15 @@ void Scheduler::readProcess(const string& filename){
 	if(DEBUG) cout << "Reading in Processes\n\tID:\tArrival Time\tTotal CPU\tAvgBurst\n";
 	while(ifs >> id >> arrivalTime >> totalCPU >> avgBurst){
 		if(DEBUG) cout << "\t" << id << "\t" << arrivalTime << "\t" << totalCPU << "\t" << avgBurst << endl;
-		push(Process(id, arrivalTime, totalCPU, avgBurst));
+		readin.push(Process(id, arrivalTime, totalCPU, avgBurst));
 	}
 }
 
-int Scheduler::nextrandInt(const std::string& randNumfile){ 
+int Scheduler::random(const std::string& randNumfile){ 
 	/* keep the size of the rand dequeue reasonable, 100 elements max,
 	* but only read if the queue is about half the size
 	*/
-	int tmpFront;
+	int tmpFront, tmp(0), tmp1(100), skipLines;
 	if( !rand.empty( ) ) {
 		tmpFront = rand.front();
 		rand.pop_front();
@@ -84,7 +64,6 @@ int Scheduler::nextrandInt(const std::string& randNumfile){
 		exit(1);
 	}
 
-	int tmp = 0, tmp1 = 100;
 	/* since the size is less than what we want, add some more from file, 
 	*/
 
@@ -96,7 +75,7 @@ int Scheduler::nextrandInt(const std::string& randNumfile){
 
 	/* skip the number of lines already read
 	*/
-	int skipLines = lineNumrand;
+	skipLines = lineNumrand;
 
 	while( ifl >> tmp && 0 < tmp1){
 

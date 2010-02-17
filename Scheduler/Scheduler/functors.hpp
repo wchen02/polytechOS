@@ -11,7 +11,7 @@ class LeastRemainingTime{
 public:
   
    bool operator( )( const Process & lhs, const Process & rhs ){
-	   return lhs.getTotalcpu() < rhs.getTotalcpu();
+	   return lhs.cpuMax < rhs.cpuMax;
       }
 };
 
