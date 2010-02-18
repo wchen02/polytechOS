@@ -9,10 +9,18 @@
 */
 class LeastRemainingTime{
 public:
-  
-   bool operator( )( const Process & lhs, const Process & rhs ){
-	   return lhs.cpuMax < rhs.cpuMax;
-      }
+
+	bool operator( )( const Process & lhs, const Process & rhs ){
+		return lhs.getTotalcpu( ) < rhs.getTotalcpu( );
+	}
+};
+
+class LeastBurst{
+public:
+	bool operator( )( const Process & lhs, const Process & rhs ){
+		return lhs.getcpuBurst( ) < rhs.getcpuBurst( );
+	}
+
 };
 
 // well, since we are using priority queue for both of our algorithms, we need to order them in FCFS fashion.

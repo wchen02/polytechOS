@@ -20,24 +20,32 @@ public:
 
 	int getPId( ) const;            //returns the process ID
 
-	//int getTotalcpu( ) const;      //returns the maximun CPU time allowed for
-	//this process
+	int getTotalcpu( ) const;      //returns the maximun CPU time allowed for
+	
 
-	//void decreasecpuTotal( const int d ); //decreases the cpu burst time
+	void decreasecpuTotal( const int d ); //decreases the cpu burst time
 
-	//int getcpuBurst( )const;
+	void decreasecpuBurst( const int d ); //decreases the cpu burst time
+
+	int getcpuBurst( )const;
+
+	void resetcpuBurst(  ) ;
+
+	
 
 	int getarrivalTime( ) const;          //returns when the process arrived
+	
 	//for different scheduler algorithms
-	//void setProcess(int, int, int, int);
+	void setProcess(int, int, int, int);
 
-	//int getIOdelay() const;
-	//void setIOdelay(int);
+	int getIOdelay() const;
+	void setIOdelay(int);
 
-	int cpuMax, cpuBurst, ioDelay;
+	
 private:
-
+	int cpuMax, cpuBurst, ioDelay;
 	int pid, arrivalTime;
+	int originalBurst;
 	bool run;
 };
 

@@ -4,6 +4,7 @@
 #include <queue>
 #include "scheduler.h"
 #include "functors.hpp"
+#include "p_queue.h"
 
 /* Shortest Remaining Time Next with Aging.
 o Premptive.
@@ -19,13 +20,20 @@ o If the aging algorithm predicts that a process will have a CPU burst of initia
 
 class Srtn : public Scheduler{
 public:
+	void virtual waitingQueueTask();
+	void virtual readinQueueTask();
+	void virtual readyQueueTask();
+
 	Srtn(const std::string& resourceFile);
+	
 	double predictNextBurst( );
 	void updateLastBurst( int );
 
+	void run( );
+
 private:
-	std::priority_queue<Process, std::vector<Process>, LeastRemainingTime > ready;
-	std::priority_queue<Process, std::vector<Process>, LeastRemainingTime > blocking;
+	p_queue<Process, LeastRemainingTime, LeastBurst> ready;
+	p_queue<Process, LeastRemainingTime, LeastBurst> blocking;
 	int lastBurst;
 	double history;
 };

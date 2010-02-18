@@ -20,19 +20,24 @@ bool Process::isReady() const{ return run; }
 
 int Process::getPId() const{ return pid; }
 
-//int Process::getTotalcpu() const{ return cpuMax; }
+int Process::getTotalcpu() const{ return cpuMax; }
 
-//void Process::decreasecpuTotal( int d ){
-//	cpuMax -= d;
-//	if( cpuMax < 0) {     //check to see if the burst becomes
-//		cpuMax = 0;          //negative, if so disable future    
-//		run = false;  //runs of the process
-//	}
-//}
-
+void Process::decreasecpuTotal( int d ){
+	cpuMax -= d;
+	if( cpuMax < 0) {     //check to see if the burst becomes
+		cpuMax = 0;          //negative, if so disable future    
+		run = false;  //runs of the process
+	}
+}
+void Process::decreasecpuBurst( int d ){
+	cpuBurst -= d;
+	if( cpuBurst < 0) {     //check to see if the burst becomes
+		cpuBurst = 0;          //negative, if so disable future    
+	}
+}
 int Process::getarrivalTime( ) const { return arrivalTime; }
 
-//int Process::getcpuBurst( ) const { return cpuBurst; }
+int Process::getcpuBurst( ) const { return cpuBurst; }
 
 std::ostream & operator<<( std::ostream & out, const Process & p){
 	out << "Process ID : "<< p.pid << endl;
@@ -43,16 +48,23 @@ std::ostream & operator<<( std::ostream & out, const Process & p){
 	return out;
 }
 
-//void Process::setProcess(int processid, int cputotal, int cpuburst, int arrivaltime){
-//	pid = processid;
-//	cpuMax = cputotal;
-//	cpuBurst = cpuburst;
-//	arrivalTime = arrivalTime;
-//}
-//
-//int Process::getIOdelay() const{
-//	return ioDelay;
-//}
-//void Process::setIOdelay(int newDelay){
-//	ioDelay = newDelay;
-//}
+void Process::setProcess(int processid, int cputotal, int cpuburst, int arrivaltime){
+	pid = processid;
+	cpuMax = cputotal;
+	cpuBurst = cpuburst;
+	arrivalTime = arrivalTime;
+}
+
+int Process::getIOdelay() const{
+	return ioDelay;
+}
+void Process::setIOdelay(int newDelay){
+	ioDelay = newDelay;
+}
+
+
+
+
+void Process::resetcpuBurst( ){
+	cpuBurst = originalBurst;
+}

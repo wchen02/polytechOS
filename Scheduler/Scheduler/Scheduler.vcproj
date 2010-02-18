@@ -196,6 +196,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\p_queue.h"
+				>
+			</File>
+			<File
 				RelativePath=".\process.h"
 				>
 			</File>

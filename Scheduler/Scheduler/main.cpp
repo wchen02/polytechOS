@@ -4,12 +4,18 @@
 #include "scheduler.h"
 #include "fcfs.h"
 //#include "srtn.h"
+#include "p_queue.h"
+#include "process.h"
+#include "functors.hpp"
+
 
 using namespace std;
 
 const string RESOURCE_FILE("scheduling.txt");
 
-void menu(){
+
+
+/*void menu(){
 	int command;
 	Scheduler* task;
 	string output("");
@@ -19,9 +25,12 @@ void menu(){
 	output += "\t3.Quit this program\n";
 	output += "Please enter the number of Algorithm you want to use for the scheduler\n>>";
 	cout << output;
-	
-	cin >> command; // this doesn't protect against invalid entries!
 
+	cin >> command; // this doesn't protect against invalid entries!
+	while(command < 1 || 3 < command){//this does
+		cout << "WRONG ENTRY! \n"+output<<endl;
+		cin >> command;
+	}
 	while(true){
 		switch(command){
 			case 1:
@@ -33,18 +42,16 @@ void menu(){
 			case 3:
 				exit(0);
 				break;
-			default:
-				cout << "INVALID ENTRY TRY AGAIN\n";
-				break;
 		}
-		system("pause");
-		system("cls");
-		cout << output;
-		cin >> command; // this doesn't protect against invalid entries!
 	}
 
 }
-
+*/
 int main(int argc, char * argv[]){
-	menu();
+	//menu();
+	
+
+	system("pause");
+
+
 }
