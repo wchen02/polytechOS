@@ -137,7 +137,8 @@ void Scheduler::readResource(const string& filename){
 	ifstream ifs(filename.c_str());
 	if(!ifs) exit(1);
 
-	string tmp, parameter, value, debugMsg;
+	string tmp, parameter, value;
+	stringstream debugMsg;
 	size_t pos;
 	Parameter param;
 
@@ -153,12 +154,14 @@ void Scheduler::readResource(const string& filename){
 		if(DEBUG) cout << "\tvalue: " << value << endl;
 		setValue(param, value);
 
-		if(DEBUG) 
-			debugMsg += "Read in: " + tmp
-					 +  "\nPosition of =: " + pos;/*
-					 +  "\nparameter: " + parameter
-					 +  "\nParameter: " + param
-					 +	"\nvalue: " + value + "\n";*/
+		if(DEBUG) {
+			debugMsg << "Read in: " << tmp 
+					 << "\nPosition of =: " << pos
+					 << "\nparameter: " << parameter
+					 << "\nParameter: " << param
+					 <<	"\nvalue: " << value << "\n";
+			cout << debugMsg.str();
+		}
 	}
 }
 
