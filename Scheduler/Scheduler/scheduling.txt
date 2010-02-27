@@ -1,5 +1,9 @@
 ProcessFile=Processes.txt
+
 IOdelay=2
-ContextSwitchDelay=1
+
 AgingRatio=.5
+
+ContextSwitchDelay=1
+
 Debug=true

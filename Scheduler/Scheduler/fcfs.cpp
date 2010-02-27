@@ -1,103 +1,142 @@
-/*#include <iostream>
+#include <iostream>
 #include <queue>
 #include <cstdlib>
-#include "process.h"
-#include "scheduler.h"
-#include "fcfs.h"
+#include "process.hpp"
+#include "scheduler.hpp"
+#include "fcfs.hpp"
 
 using namespace std;
 
-FCFS::FCFS(const std::string& resourceFile) : Scheduler(resourceFile){
-	nothingToRun = false;
-	while(!nothingToRun){
-		if(DEBUG){
-			cout << "===============\nTime " << now << endl << 
-				"Running: ";
-			if(running.getPId()== -1)
-				cout << "none";	
-			else
-				cout << running.getPId();
-			cout << "\nArrival:";
-			if(arrival.size())
-				for(int i=0; i < arrival.size(); i++)
-					cout << " " << arrival[i].getPId();
-			else
-				cout << " none";
-			cout << "\nNext Ready: ";
-			if(ready.size())
-				cout << ready.top().getPId();
-			else cout << "none";
-			cout << "\nWaiting: ";
-			if(waiting.size())
-				for(int i=0; i < waiting.size(); i++)
-					cout << " " << waiting[i].getPId();
-			else
-				cout << " none";
-			cout << endl;
-		}
-		if(DEBUG) cout << "===============\n";
-		readinQueueTask();
+FCFS::FCFS(const std::string& resourceFile) : Scheduler(resourceFile), running(NULL){}
+
+void FCFS::run(){
+	cout << "===============\n"
+		<< "      FCFS     \n"
+		<< "===============\n";
+
+	while(true){
+		if(DEBUG) printSchedulerInfo(); 
+
+		arrivalQueueTask();
 		waitingQueueTask();
 		readyQueueTask();
 		now++;
 
-		if(!arrival.size() && !waiting.size() && !ready.size() && running.getPId() == -1){
-			nothingToRun = true;
-			if(DEBUG) cout << "No more processes to run\n";
-		} // theres no more processes in the queue, quit.
+		if(!arrivalQueue.size() && !waiting.size() && !ready.size() && !running)
+			break; // theres no more processes in the queue, quit.
 	}
+}
+
+void FCFS::printSchedulerInfo() const{
+	cout << "===============\nTime " << now << endl << 
+		"Running: ";
+	if(!running) cout << "none";	
+	else cout << running->getPid();
+	
+	cout << "\nArrival:";
+	if(arrivalQueue.size())
+		for(size_t i=0; i < arrivalQueue.size(); i++)
+			cout << " " << arrivalQueue[i]->getPid();
+	else cout << " none";
+	
+	cout << "\nReady: ";
+	if(ready.size())
+		for(size_t i=0; i < ready.size(); i++)
+			cout << " " << ready[i]->getPid();
+	else cout << "none";
+	
+	cout << "\nWaiting: ";
+	if(waiting.size())
+		for(int i=0; i < waiting.size(); i++)
+			cout << " " << waiting[i]->getPid();
+	else cout << " none";
+	cout << "\n===============\n";
 }
 
 void FCFS::waitingQueueTask(){
 	for(size_t i=0; i < waiting.size(); ++i){
-		if( waiting[i].ioDelay ){
-			waiting[i].ioDelay--;
-			if(!waiting[i].ioDelay){
+		if( waiting[i]->getIoDelay() ){
+			waiting[i]->decrementIoDelay();
+			if( !waiting[i]->getIoDelay() ){
 				resetBurstNdelay(waiting[i]);
-				ready.push(waiting[i]);
-				if(DEBUG) cout << "Moving process pid:" << waiting[i].getPId() << " from waiting to ready\n";
+				ready.push_back(waiting[i]);
+				cout << "Time " << now << ": Moving process " 
+					<< waiting[i]->getPid() << " from waiting to ready\n";
 				waiting.erase(waiting.begin()+i);
+				resetCtxDelay();
+				if(contextSwitchDelay) contextSwitchDelay--;
 			}
 		}
 	}
 }
 
-void FCFS::readinQueueTask(){
-	if(arrival.size()){
-		if(arrival.front().getarrivalTime() == now){
-			resetBurstNdelay(arrival.front());
-			ready.push(arrival.front());
-			if(DEBUG) cout << "Moving process pid:" << arrival.front().getPId() << " from arrival to ready\n";
-			arrival.erase(arrival.begin());
-		}
+void FCFS::arrivalQueueTask(){
+	while(arrivalQueue.size() && arrivalQueue.front()->getArrival() == now){
+		resetBurstNdelay(arrivalQueue.front());
+		ready.push_back(arrivalQueue.front());
+		cout << "Time " << now << ": Moving process " 
+			<< arrivalQueue.front()->getPid() 
+			<< " from arrival to ready\n";
+		arrivalQueue.erase(arrivalQueue.begin());
 	}
 }
 
 void FCFS::readyQueueTask(){
-	if(running.cpuBurst == -9999 && ready.size()){
-		running = ready.top();
-		ready.pop();
-		cout << "Moving process pid:" << running.getPId() << " from ready to running. Remaining Time: " << running.cpuMax << ".\n";
+	if(ready.size()){
+		if(!running || !running->getCpuTotal( )){
+			running = ready[0];
+			ready.erase( ready.begin() );
+			cout << "Time " << now << ": Moving process " << running->getPid() 
+				<< " from ready to running. Remaining Time: " 
+				<< running->getCpuTotal() << ".\n";
+			resetCtxDelay();
+		}
+	}
+
+	if(contextSwitchDelay){
+		contextSwitchDelay--;
 		return;
 	}
-	if(running.cpuBurst > 0 && running.cpuBurst != -9999){
-		running.cpuBurst--;
-		running.cpuMax--;
-		if(DEBUG) cout << "Process pid:" << running.getPId() << " ending burst(" << running.cpuBurst << "). Remaining Time: " << running.cpuMax << ".\n";
 
-		if(!running.cpuMax){
-			if(DEBUG) cout << "Finish with process pid:" << running.getPId() << endl;
-			running = Process();
-		}else if(!running.cpuBurst){
+	if(running){
+		running->incrementElapsed( );
+		running->decrementCpuTotal();
+
+		double tmp;
+		bool eob(false), bProb(false);
+
+		if(!running->getCpuTotal()){
+			eob = true;
+			cout << "Time " << now << ": Process " << running->getPid() << " finished.\n";
+			running = NULL;
+			return;
+		}
+
+		if(running->getElapsed( ) < running->getAvgBurst( ) -1 ) eob = false;
+		else if(running->getElapsed( ) == running->getAvgBurst( ) -1 ){
+			tmp = getProbability();
+			if(tmp <= 1.0 / 3 ) eob = true;
+		}
+		else if(running->getElapsed( ) == running->getAvgBurst( ) ){
+			tmp = getProbability();
+			if(tmp <= 1.0 / 2 ) eob = true;
+		}
+		else if(running->getElapsed( ) > running->getAvgBurst( ) ) eob = true;
+	
+		if(eob){
+			cout << "Time " << now << ": Process " << running->getPid() 
+				<< " ending burst(" << running->getElapsed() 
+				<< "). Remaining Time: " << running->getCpuTotal() << ".\n";
+
 			waiting.push_back(running);
-			if(DEBUG) cout << "Moving process pid:" << running.getPId() << " from ready to waiting\n";
-			running = Process();
+			running = NULL;
+			resetCtxDelay();
+			if(contextSwitchDelay) contextSwitchDelay--;
 		}
 	}
 }
 
-void FCFS::resetBurstNdelay(Process& p){
-	p.ioDelay = this->ioDelay;
-	p.cpuBurst = 2; // needs to be computed by the random file
+void FCFS::resetBurstNdelay(Process* const p){
+	p->setIoDelay(this->ioDelay);
+	p->resetElapsed(); // needs to be computed by the random file
 }
-*/

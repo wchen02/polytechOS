@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "scheduler.hpp"
-#include "fcfs.hpp"
+#include "scheduler.h"
+#include "fcfs.h"
 //#include "srtn.h"
-#include "p_queue.hpp"
-#include "process.hpp"
+//#include "p_queue.h"
+#include "process.h"
 #include "functors.hpp"
 
 
@@ -35,29 +35,21 @@ void menu(){
 		switch(command){
 			case 1:
 				task = new FCFS(RESOURCE_FILE.c_str());
-				task->run();
 				break;
 			case 2:
-				//task = new SRTN(RESOURCE_FILE.c_str());
+//				task = new Srtn(RESOURCE_FILE.c_str());
 				break;
 			case 3:
 				exit(0);
 				break;
-			default:
-				cout << "INVALID ENTRY TRY AGAIN\n";
-				break;
 		}
-		system("pause");
-		system("cls");
-		cout << output;
-		cin >> command; // this doesn't protect against invalid entries!
 	}
 
 }
 
 int main(int argc, char * argv[]){
 	menu();
-
+	
 
 	system("pause");
 

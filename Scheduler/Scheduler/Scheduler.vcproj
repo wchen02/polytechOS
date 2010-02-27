@@ -170,10 +170,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\process.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\scheduler.cpp"
 				>
 			</File>
@@ -188,7 +184,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\fcfs.h"
+				RelativePath=".\fcfs.hpp"
 				>
 			</File>
 			<File
@@ -196,19 +192,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\p_queue.h"
+				RelativePath=".\p_queue.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\process.h"
+				RelativePath=".\process.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\scheduler.h"
+				RelativePath=".\scheduler.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\srtn.h"
+				RelativePath=".\srtn.hpp"
 				>
 			</File>
 		</Filter>

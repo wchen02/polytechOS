@@ -33,7 +33,7 @@
 //		clock_tick = i;
 //		Process* running = NULL;
 //		//check for first runs until first element is moved
-//		if( arrival[ i ].getarrivalTime( ) == clock_tick )
+//		if( arrival[ i ].getArrivalTime( ) == clock_tick )
 //			ready.push_back( arrival[ i ] );
 //
 //		if(running == NULL){
@@ -44,28 +44,30 @@
 //		if(running != NULL ){
 //			/*run for 1 time slot*/
 //			clock_tick = i += 1;
-//			if( running->getTotalcpu( ) ){
+//			if( running->getCpuTotal( ) ){
 //				/*if there is something to run*/
-//				running->decreasecpuTotal( 1 );
+//				//running->decreasecpuTotal( 1 );
+//				running->decrementCpuTotal();
 //
-//				if( 0 < running->getElapsed( ) )
-//					running->decreaseElapsed( 1 );
+//				if( 0 < running->getCpuBurst( ) )
+//					//running->decreasecpuBurst( 1 );
+//					running->decrementCpuBurst();
 //				
-//				else if( 0 == running->getElapsed( ) ){
+//				else if( 0 == running->getCpuBurst( ) ){
 //					//wait(contextSwitchDelay);------------------------>> need to write context switch function to do i+= contextSwithcDelay then loop through the availabel array and make sure that all the processes that were not pushed to ready queue are pushed
-//					running->resetElapsed( );
+//					running->resetCpuBurst( );
 //					blocking.push_back( *running );
 //					running = NULL;
 //				}
 //
 //			}
-//			else if(running->getTotalcpu( ) == 0 ){
+//			else if(running->getCpuTotal( ) == 0 ){
 //				//Sleep(contextSwitchDelay);
 //				running = NULL;
 //			}
 //
 //
-//			if( arrival[ i ].getarrivalTime( ) == clock_tick )
+//			if( arrival[ i ].getArrivalTime( ) == clock_tick )
 //				ready.push_back( arrival[ i ] );
 //		}
 //
