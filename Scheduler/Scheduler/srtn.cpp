@@ -5,9 +5,7 @@
 //
 //using namespace std;
 //
-//double Srtn::predictNextBurst( ){ 
-//	return history = ( getAgingRatio( ) * lastBurst ) + ( ( 1 - getAgingRatio( ) ) * history );
-//}
+
 //
 //Srtn::Srtn(const std::string& resourceFile) : Scheduler(resourceFile){ 
 //	lastBurst = 0;	

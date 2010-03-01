@@ -10,17 +10,17 @@
 class LeastRemainingTime{
 public:
 
-	bool operator( )( const Process & lhs, const Process & rhs ){
-		return lhs.getCpuTotal( ) < rhs.getCpuTotal( );
+	bool operator( )( Process * lhs, Process * rhs )const {
+		return lhs->getPrediction( ) < rhs->getPrediction( );
 	}
 };
 
-class LeastBurst{
-public:
-	bool operator( )( const Process & lhs, const Process & rhs ){
-		return lhs.getElapsed( ) < rhs.getElapsed( );
-	}
-
-};
+//class LeastBurst{
+//public:
+//	bool operator( )( const Process & lhs, const Process & rhs ){
+//		return lhs.getElapsed( ) < rhs.getElapsed( );
+//	}
+//
+//};
 
 #endif
